@@ -1,0 +1,19 @@
+version: "3.8"
+
+services: 
+    django:
+        build: .
+        container_name: django
+        command: python3 manage.py runserver 0.0.0.0:8000
+        volumes: 
+            - .:/usr/src/app
+        ports: 
+            - "8000:8000"
+        depends_on: 
+            - redis
+    redis:
+        image: redis:6.2.4
+        container_name: redis
+        command: redis-server
+        ports: 
+            - "6379:6379"
